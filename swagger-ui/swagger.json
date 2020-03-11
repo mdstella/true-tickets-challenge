@@ -1,0 +1,68 @@
+{
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "schemes": ["http"],
+  "swagger": "2.0",
+  "info": {
+    "description": "the purpose of this application is create metrics system",
+    "title": "true-tickets challenge",
+    "version": "0.0.1"
+  },
+  "host": "localhost:9091",
+  "basePath": "/",
+  "paths": {
+    "/metric/{key}": {
+      "post": {
+        "description": "Status endpoint to check the app is up and running",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "schemes": ["http", "https"],
+        "tags": ["metrics"],
+        "operationId": "AddMetricRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "description": "The metric key",
+            "name": "key",
+            "in": "path",
+            "required": true
+          },
+          {
+            "x-go-name": "Value",
+            "description": "The metric value",
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MetricInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/StatusResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetricInput": {
+      "description": "Represents the metric value",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "value"
+        }
+      },
+      "x-go-package": "github.com/true-tickets-challenge/model"
+    }
+  },
+  "responses": {
+    "AddMetricResponse": {
+      "description": "AddMetricResponse just notify if there is any error adding the new metric"
+    }
+  }
+}
