@@ -36,9 +36,13 @@ func (srv *MetricsServiceImpl) AddMetric(key string, value int) error {
 	if key == "" {
 		return errors.NewBadParamError("Errors: metric key can't be empty")
 	}
-	if value <= 0 {
-		return errors.NewBadParamError("Errors: metric value has to be higher than 0")
-	}
+	// removing this validations as I assume we can consider negative metrics, just keeping the
+	// validation here to show that we can add validation or logic. Also the numbers validations can be done
+	// using a golang validator adding parameters on the request object and using a validation library like: github.com/go-playground/validator/v10
+
+	// if value <= 0 {
+	// 	return errors.NewBadParamError("Errors: metric value has to be higher than 0")
+	// }
 
 	return srv.dao.StoreMetric(key, value)
 }

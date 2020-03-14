@@ -2,6 +2,7 @@ package endpoint
 
 import (
 	"context"
+	"math"
 
 	"github.com/go-kit/kit/endpoint"
 	"github.com/mdstella/true-tickets-challenge/model"
@@ -12,7 +13,9 @@ import (
 func makeAddMetricEndpoint(srv service.MetricsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(model.AddMetricRequest)
-		err := srv.AddMetric(req.Key, req.Value)
+		// rounding the input to the nearest int value
+		nearestInt := int(math.Round(req.Value))
+		err := srv.AddMetric(req.Key, nearestInt)
 		return model.AddMetricResponse{
 			Err: err,
 		}, nil

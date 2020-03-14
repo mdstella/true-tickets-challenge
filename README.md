@@ -25,3 +25,6 @@
       1. Run `docker ps -a` to see the already used containers.
       2. Run `docker rm TTC` (TTC or the name you used for the container).
       3. After that you will be able to start it again
+6. Considering negative and float values as input
+   1. I'm considering negative values as input
+   2. I'm considering float values as input. As soon as they enter the system, I'm rounding them to the nearest integer and using it as integer in the system.

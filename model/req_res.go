@@ -14,7 +14,7 @@ type AddMetricRequest struct {
 
 	// The metric value
 	// in: body
-	Value int `json:"value,omitempty"`
+	Value float64 `json:"value,omitempty"`
 }
 
 // AddMetricResponse just notify if there is any error adding the new metric
