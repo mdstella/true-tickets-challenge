@@ -28,6 +28,13 @@ import (
 	"github.com/mdstella/true-tickets-challenge/endpoint"
 )
 
+const (
+	// added as a constant, but on a productive environment this
+	// should be a property value externalized to avoid changing
+	// code if we need to increase/decrease this value
+	defaultTTL = 3600 // 3600 is 60 minutes in seconds
+)
+
 //go:generate swagger generate spec -o swagger-ui/swagger.json
 func main() {
 	logger := log.NewLogfmtLogger(os.Stderr)
@@ -43,7 +50,9 @@ func main() {
 	}
 
 	// service, dao and endpoints intialization
-	dao := dao.NewMetricDaoMemoryImpl()
+	// adding the TTL to the DAO that will handle that time to know which information
+	// need to be retrived.
+	dao := dao.NewMetricDaoMemoryImpl(defaultTTL)
 	srv := service.NewMetricsServiceImpl(dao)
 	handler := endpoint.RegisterEndpoints(srv)
 

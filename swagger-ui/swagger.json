@@ -13,7 +13,7 @@
   "paths": {
     "/metric/{key}": {
       "post": {
-        "description": "Status endpoint to check the app is up and running",
+        "description": "Endpoint to add a new metric",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "schemes": ["http", "https"],
@@ -40,7 +40,32 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/StatusResponse"
+            "$ref": "#/responses/AddMetricResponse"
+          }
+        }
+      }
+    },
+    "/metric/{key}/sum": {
+      "get": {
+        "description": "Endpoint to obtain the sum for a given metric",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "schemes": ["http", "https"],
+        "tags": ["metrics"],
+        "operationId": "SumMetricRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "description": "The metric key",
+            "name": "key",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SumMetricResponse"
           }
         }
       }
@@ -63,6 +88,16 @@
   "responses": {
     "AddMetricResponse": {
       "description": "AddMetricResponse just notify if there is any error adding the new metric"
+    },
+    "SumMetricResponse": {
+      "description": "SumMetricResponse retrieves the sum of a given metric in the last 60 minutes",
+      "headers": {
+        "value": {
+          "type": "integer",
+          "format": "int64",
+          "description": "reprensents the sum of the metric"
+        }
+      }
     }
   }
 }

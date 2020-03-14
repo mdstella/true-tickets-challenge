@@ -24,3 +24,16 @@ func decodeAddMetricRequest(_ context.Context, r *http.Request) (interface{}, er
 	request.Key = key
 	return request, nil
 }
+
+//decodeSumMetricRequest - decode the sumMetric request to generate the model request
+func decodeSumMetricRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	params := mux.Vars(r)
+	key, ok := params["key"]
+	if !ok {
+		return nil, errors.New("Bad routing, metric key not provided")
+	}
+	request := model.SumMetricRequest{
+		Key: key,
+	}
+	return request, nil
+}

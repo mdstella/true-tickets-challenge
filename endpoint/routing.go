@@ -28,7 +28,7 @@ func RegisterEndpoints(srv service.MetricsService) http.Handler {
 	// Define the method, path and the handler in the router to be able to dispatch requests to it.
 	// swagger:route POST /metric/{key} metrics AddMetricRequest
 	//
-	// Status endpoint to check the app is up and running
+	// Endpoint to add a new metric
 	//
 	//     Consumes:
 	//     - application/json
@@ -39,8 +39,26 @@ func RegisterEndpoints(srv service.MetricsService) http.Handler {
 	//     Schemes: http, https
 	//
 	//     Responses:
-	//       200: StatusResponse
+	//       200: AddMetricResponse
 	r.Methods("POST").Path("/metric/{key}").Handler(addMetricHandler)
+
+	sumMetricHandler := httptransport.NewServer(makeSumMetricEndpoint(srv), decodeSumMetricRequest, encodeResponse)
+	// Define the method, path and the handler in the router to be able to dispatch requests to it.
+	// swagger:route GET /metric/{key}/sum metrics SumMetricRequest
+	//
+	// Endpoint to obtain the sum for a given metric
+	//
+	//     Consumes:
+	//     - application/json
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http, https
+	//
+	//     Responses:
+	//       200: SumMetricResponse
+	r.Methods("GET").Path("/metric/{key}/sum").Handler(sumMetricHandler)
 
 	// adding swagger endpoint to have the API doc available
 	swaggerUrl := "/swagger-ui/"

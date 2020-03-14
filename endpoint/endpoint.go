@@ -18,3 +18,15 @@ func makeAddMetricEndpoint(srv service.MetricsService) endpoint.Endpoint {
 		}, nil
 	}
 }
+
+// makeSumMetricEndpoint - endpoint invoked to obtain the metric sum
+func makeSumMetricEndpoint(srv service.MetricsService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(model.SumMetricRequest)
+		sum, err := srv.SumMetric(req.Key)
+		return model.SumMetricResponse{
+			Value: sum,
+			Err:   err,
+		}, nil
+	}
+}
