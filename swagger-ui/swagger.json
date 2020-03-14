@@ -77,8 +77,8 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "integer",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "x-go-name": "value"
         }
       },
