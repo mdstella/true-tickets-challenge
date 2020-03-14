@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "1f0baec9-fb36-4d49-a4ec-323cb9305628",
+		"name": "True-tickets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add metric",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"value\": 22\t\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9091/metric/myMetric",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"metric",
+						"myMetric"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9091/metric/myMetric/sum",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9091/metric/myMetric/sum",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"metric",
+						"myMetric",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
