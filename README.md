@@ -28,3 +28,7 @@
 6. Considering negative and float values as input
    1. I'm considering negative values as input
    2. I'm considering float values as input. As soon as they enter the system, I'm rounding them to the nearest integer and using it as integer in the system.
+7. Adding test cases
+   1. Added multilayer/integration and unit tests for dao and service layer.
+   2. Consider that we have an implementation based on a certain time to see the different scenarios working. To do that I consider to add some `time.Sleep` to be able to make different tests
+   3. Coverage: you can also go to the proyect root and run `go test ./... -cover` and it will notify the coverage of each package (only service and dao packages will have code coverage)   

@@ -8,4 +8,5 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gorilla/mux v1.7.3
 	github.com/rs/cors v1.7.0
+	github.com/stretchr/testify v1.5.1
 )
